@@ -1,0 +1,13 @@
+The plastex-docbook project contains templates and classes 
+to enable the plastex package to render documents written in LaTeX
+markup language to DocBook 4.5 and DocBook 5 XML.
+
+To use this package you must install the plasTeX renderer available at
+plastex.sourceforge.net
+
+To install plastex-docbook, run setup.py as usual. 
+
+Once installed, invoke plastex as follows:
+--renderer=DocBook4.5 
+or 
+--renderer=DocBook5.0
