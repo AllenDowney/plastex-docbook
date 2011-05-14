@@ -8,6 +8,6 @@ plastex.sourceforge.net
 To install plastex-docbook, run setup.py as usual. 
 
 Once installed, invoke plastex as follows:
---renderer=DocBook4.5 
+--renderer=DocBook45 
 or 
---renderer=DocBook5.0
+--renderer=DocBook50
