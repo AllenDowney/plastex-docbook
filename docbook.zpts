@@ -1,0 +1,721 @@
+name: ` ' ^ " ~ = . u v H t c d b l L
+<span tal:omit-tag="">
+  <mediaobject tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata format="SVG" tal:attributes="fileref self/vectorImage/url" />
+    </imageobject>
+    <textobject>
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+  <mediaobject tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata tal:attributes="fileref self/image/url" />
+    </imageobject>
+    <textobject>
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+</span>
+
+name: center centering centerline
+<span tal:replace="self"></span>
+
+name: flushleft raggedright leftline
+<span tal:replace="self"></span>
+
+name: raggedleft flushright llap
+<span tal:replace="self"></span>
+
+name: raggedbottom
+
+name: tabular array tabular* table table* tabularx
+type: xml
+<metal:block>
+   <metal:block tal:condition="self/title">
+     <table tal:attributes="id self/title/id" remap="tabular">
+     <caption tal:content="self/title"></caption>
+     <tr tal:repeat="row self">
+     <metal:block tal:repeat="cell row">
+       <th tal:condition="cell/isHeader"
+           tal:attributes="colspan cell/attributes/colspan"
+           tal:content="cell">
+       </th>
+       <td tal:condition="not:cell/isHeader"
+           tal:attributes="colspan cell/attributes/colspan"
+           tal:content="cell">
+       </td>
+     </metal:block>
+     </tr>
+     </table>
+   </metal:block>
+   <metal:block tal:condition="not:self/title">
+     <informaltable remap="tabular">
+     <tr tal:repeat="row self">
+     <metal:block tal:repeat="cell row">
+       <th tal:condition="cell/isHeader"
+           tal:attributes="colspan cell/attributes/colspan"
+           tal:content="cell">
+       </th>
+       <td tal:condition="not:cell/isHeader"
+           tal:attributes="colspan cell/attributes/colspan"
+           tal:content="cell">
+       </td>
+     </metal:block>
+     </tr>
+     </informaltable>
+   </metal:block>
+</metal:block>
+
+name: multicolumn
+<span tal:replace="self"></span>
+
+name: cline toprule bottomrule midrule cmidrule morecmidrules addlinespace specialrule
+name: bibliographystyle
+
+name: thebibliography
+type: xml
+<bibliomixed tal:repeat="item self">
+    <abbrev tal:content="item/bibcite"></abbrev>
+   <bibliomisc tal:content="item"></bibliomisc>
+</bibliomixed>
+
+
+
+name: bibliography
+type: xml
+<bibliography>
+  <title  tal:content="document/languageNames/Bibliographyname"></title>
+  <div tal:replace="self"></div>
+</bibliography>
+
+name: cite
+type: xml
+<citation tal:repeat="item self/citation">
+  <link tal:condition="item/idref/bibitem/url" 
+        tal:attributes="linkend item/idref/bibitem/url" 
+        tal:content="item">
+  </link>
+  <span tal:omit-tag="item/idref/bibitem/url" 
+        tal:replace="item"></span>
+</citation>
+
+name: bibliographyref
+type:xml
+<link tal:attributes="linkend self/idref/bibitem/url" tal:content="self"></link>
+name: mbox makebox
+<phrase remap="mbox" tal:content="self"></phrase>
+
+name: fbox framebox
+<phrase remap="fbox" tal:content="self"></phrase>
+
+name: parbox
+<span tal:replace="self"></span>
+
+name: minipage
+<span tal:replace="self"></span>
+
+name: raisebox rule
+<span tal:omit-tag="">
+  <mediaobject tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata format="SVG" tal:attributes="fileref self/vectorImage/url" />
+    </imageobject>
+    <textobject>
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+  <mediaobject tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata tal:attributes="fileref self/image/url" />
+    </imageobject>
+    <textobject>
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+</span>
+name: linebreak \ newline 
+
+name:pagebreak newpage clearpage cleardoublepage
+<beginpage />
+name: ref
+type:xml
+<link 
+   tal:attributes="linkend self/idref/label/id" 
+   tal:content="self/idref/label/ref"></link>
+
+name: pageref
+type:xml
+<link 
+   tal:attributes="linkend self/idref/label/id" 
+   tal:content="self/idref/label/ref">*</link>
+
+name: label
+type:xml
+<anchor tal:attributes="id self/id"/>
+
+name: caption
+
+name: figure figure*
+<span tal:omit-tag="">
+  <informalfigure tal:condition="not:self/title"  tal:content="self"></informalfigure>
+  <figure tal:condition="self/title" 
+          tal:attributes="label self/title/id" 
+          tal:content="self">
+    <title tal:content="self/title"></title>
+  </figure>
+</span>
+
+name: table table*
+<div tal:replace="self"></div>
+
+name: marginpar
+<phrase remap="marginpar" tal:content="self/attributes/right"></phrase>
+
+
+
+name: bfseries textbf
+<emphasis role="bold" tal:content="self"></emphasis>
+
+name: itshape textit
+<emphasis tal:content="self"></emphasis>
+
+name: mdseries textmd
+<span tal:replace="self"></span>
+
+name: rmfamily textrm sffamily textsf ttfamily texttt
+<span tal:replace="self"></span>
+
+name: upshape textup slshape textsl scshape textsc
+<span tal:replace="self"></span>
+
+name: tiny scriptsize footnotesize small normalsize large Large LARGE huge Huge
+<span tal:replace="self"></span>
+
+name: symbol
+<mediaobject remap="symbol" tal:omit-tag="not:self/renderer/vectorImager/enabled" 
+  format="SVG" tal:attributes="fileref self/vectorImage/url">
+  <imageobject>
+    <imagedata tal:attributes="fileref self/image/url"  />
+  </imageobject>
+</mediaobject>
+name: footnote
+<footnote><para tal:content="self"></para></footnote>
+
+name: footnotemark footnotetext
+name: index
+<indexterm>
+  <primary tal:attributes="sortas self/prisort" 
+           tal:content="self/primary/textNode"></primary>
+  <secondary tal:condition="self/secondary"
+             tal:attributes="sortas self/secsort" 
+             tal:content="self/secondary/textNode"></secondary>
+</indexterm>
+
+name: see seealso
+<span tal:replace="self/captionName"></span> <span tal:replace="self"></span>
+name: itemize
+type:xml
+<itemizedlist>
+  <metal:block tal:repeat="item self">
+    <listitem tal:content="item"></listitem>
+  </metal:block>
+</itemizedlist>
+
+name: enumerate
+<orderedlist>
+  <metal:block tal:repeat="item self">
+  <listitem tal:content="item"></listitem>
+  </metal:block>
+</orderedlist>
+
+name: description
+<variablelist>
+  <varlistentry tal:repeat="item self">
+    <term tal:content="item/attributes/term"></term>
+      <listitem tal:content="item"></listitem>
+  </varlistentry>
+</variablelist>
+
+name: list trivlist
+type:xml
+<simplelist type="inline">
+  <metal:block tal:repeat="item self">
+    <member 
+    tal:content="string:${item/attributes/term} |${self/attributes/defaultlabel} ${item}"></member>
+  </metal:block>
+</simplelist>
+
+name: math ensuremath
+<inlineequation>
+  <inlinemediaobject remap="math" tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" format="SVG" tal:attributes="fileref self/vectorImage/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </inlinemediaobject>
+  <inlinemediaobject remap="math" tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" tal:attributes="fileref self/image/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </inlinemediaobject>
+</inlineequation>
+
+name: displaymath equation
+<informaltable remap="equation" tal:attributes="id self/id">
+<tr>
+<td>
+<span tal:omit-tag="">
+  <mediaobject remap="math" tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" format="SVG" tal:attributes="fileref self/vectorImage/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+  <mediaobject remap="math" tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" tal:attributes="fileref self/image/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+</span>
+</td>
+<td class="eqnnum" style="width:20%" tal:condition="self/ref" tal:content="self/ref"></td>
+</tr>
+</informaltable>
+
+name: eqnarray eqnarray* align align* gather gather* falign falign* \
+      multiline multiline* alignat alignat* split
+type: xml
+<informaltable remap="eqnarray" tal:attributes="id self/id">
+<tr tal:repeat="row self" tal:attributes="id row/id">
+    <metal:block tal:repeat="cell row">
+    <td>
+  <mediaobject remap="math" tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" format="SVG" tal:attributes="fileref cell/vectorImage/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="cell/source"></phrase>
+    </textobject>
+  </mediaobject>
+  <mediaobject remap="math" tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" tal:attributes="fileref cell/image/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="cell/source"></phrase>
+    </textobject>
+  </mediaobject>
+</td>
+    </metal:block>
+    <td class="eqnnum" style="width:20%" tal:condition="row/ref" tal:content="row/ref"></td>
+</tr>
+</informaltable>
+
+name: math ensuremath
+<inlineequation>
+  <inlinemediaobject remap="math" tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" format="SVG" tal:attributes="fileref self/vectorImage/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </inlinemediaobject>
+  <inlinemediaobject remap="math" tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" tal:attributes="fileref self/image/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </inlinemediaobject>
+</inlineequation>
+
+name: displaymath equation
+<informaltable remap="equation" tal:attributes="id self/id">
+<tr>
+<td>
+<span tal:omit-tag="">
+  <mediaobject remap="math" tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" format="SVG" tal:attributes="fileref self/vectorImage/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+  <mediaobject remap="math" tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" tal:attributes="fileref self/image/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+</span>
+</td>
+<td class="eqnnum" style="width:20%" tal:condition="self/ref" tal:content="self/ref"></td>
+</tr>
+</informaltable>
+
+name: eqnarray eqnarray* align align* gather gather* falign falign* \
+      multiline multiline* alignat alignat* split
+type: xml
+<informaltable remap="eqnarray" tal:attributes="id self/id">
+<tr tal:repeat="row self" tal:attributes="id row/id">
+    <metal:block tal:repeat="cell row">
+    <td>
+  <mediaobject remap="math" tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" format="SVG" tal:attributes="fileref cell/vectorImage/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="cell/source"></phrase>
+    </textobject>
+  </mediaobject>
+  <mediaobject remap="math" tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata role="math" tal:attributes="fileref cell/image/url" />
+    </imageobject>
+    <textobject role="tex">
+      <phrase tal:content="cell/source"></phrase>
+    </textobject>
+  </mediaobject>
+</td>
+    </metal:block>
+    <td class="eqnnum" style="width:20%" tal:condition="row/ref" tal:content="row/ref"></td>
+</tr>
+</informaltable>
+name: egroup
+
+name: bgroup
+<span tal:replace="self"></span>
+
+name: tableofcontents input @vobeyspaces @noligs def protect let \
+      newcommand hfill hline openout renewcommand write hspace appendix \
+      global noindent include markboth setcounter refstepcounter \
+      medskip smallskip parindent indent setlength settowidth addtolength \
+      nopagebreak newwrite newcounter typeout sloppypar hfil thispagestyle vfill
+name: picture
+<span tal:omit-tag="">
+  <mediaobject remap="picture" tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata format="SVG" tal:attributes="fileref self/vectorImage/url" />
+    </imageobject>
+    <textobject>
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+  <mediaobject tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata tal:attributes="fileref self/image/url" />
+    </imageobject>
+    <textobject>
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+</span>
+name:@
+
+name: par 
+<para tal:content="self" tal:omit-tag="self/blockType"></para>
+
+name: active::^ 
+<superscript tal:content="self"></superscript>
+
+name: active::_
+<subscript tal:content="self"></subscript>
+name: quote
+<blockquote remap="quote">
+  <para tal:content="self"></para>
+</blockquote>
+
+name: quotation
+<blockquote remap="quotation">
+  <para tal:content="self"></para>
+</blockquote>
+
+name: verse
+<blockquote remap="verse">
+  <para tal:content="self"></para>
+</blockquote>
+
+name:part
+type:xml
+<part tal:attributes="id self/id">
+  <title tal:condition="self/title" tal:content="self/title"></title>
+  <div tal:replace="self"></div>
+</part>
+
+name:chapter
+<chapter tal:attributes="id self/id">
+  <title  tal:content="self/title"></title>
+  <div tal:replace="self"></div>
+</chapter>
+
+name:section
+<sect1 remap="section" tal:attributes="id self/id">
+  <title tal:content="self/title"></title>
+    <div tal:replace="self"></div>
+</sect1>
+
+name:subsection
+<sect2 remap="subsection" tal:attributes="id self/id">
+  <title tal:content="self/title"></title>
+    <div tal:replace="self"></div>
+</sect2>
+
+name:subsubsection
+<sect3 remap="subsubsection" tal:attributes="id self/id">
+  <title tal:content="self/title"></title>
+    <div tal:replace="self"></div>
+</sect3>
+
+name:paragraph
+<sect4 remap="paragraph" tal:attributes="id self/id">
+  <title tal:content="self/title"></title>
+    <div tal:replace="self"></div>
+</sect4>
+
+name:subparagraph
+<sect5 remap="subparagraph" tal:attributes="id self/id">
+  <title tal:content="self/title"></title>
+    <div tal:replace="self"></div>
+</sect5>
+
+name: abstract
+<abstract tal:content="self"></abstract>
+
+name: title author date thanks
+
+name: maketitle
+type:xml
+<span tal:omit-tag="" tal:define="metadata self/ownerDocument/userdata">
+<articleinfo>
+  <title tal:content="metadata/title"></title>
+  <authorgroup>
+    <author tal:repeat="auth metadata/author">
+      <surname tal:content="auth"></surname>
+    </author>
+  </authorgroup>
+  <date tal:condition="metadata/date" tal:content="metadata/date"></date>
+  <othercredit tal:condition="metadata/thanks" tal:content="metadata/thanks"></othercredit>
+</articleinfo>
+</span>
+
+name: document
+<para tal:replace="self"></para>
+
+name: par
+type:xml
+<metal:block>
+  <partintro tal:condition="python:path('self/currentSection/level')==-1">
+    <para tal:content="self"></para>
+  </partintro>
+  <para tal:condition="python:path('self/currentSection/level')!=-1"
+        tal:content="self"></para>
+</metal:block>
+name: $
+$ 
+
+name: %
+%
+
+name: {
+{
+
+name: }
+}
+
+name: _
+_
+
+name: &
+&amp;
+
+name: #
+#
+
+name:
+&#160;
+
+name: LaTeX
+<application class="software">L<superscript>a</superscript>T<subscript>e</subscript>X</application>
+
+name: TeX
+<application class="software">T<subscript>e</subscript>X</application>
+
+name: emph em
+<emphasis tal:content="self"></emphasis>
+
+name: active::~
+&#160;
+
+name: enspace enskip
+&#8194;
+
+name: quad
+&#8195;
+
+name: qquad
+&#8195;&#8195;
+
+name: thinspace /
+&#8201;
+
+name: underbar
+<phrase remap="underbar">_</phrase>
+
+name: hspace hspace* vspace vspace*
+
+name: bigskip medskip smallskip
+
+name:enlargethispage
+name: tabbing
+<span tal:omit-tag="">
+  <mediaobject tal:condition="self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata format="SVG" tal:attributes="fileref self/vectorImage/url" />
+    </imageobject>
+    <textobject>
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+  <mediaobject tal:condition="not:self/renderer/vectorImager/enabled">
+    <imageobject>
+      <imagedata tal:attributes="fileref self/image/url" />
+    </imageobject>
+    <textobject>
+      <phrase tal:content="self/source"></phrase>
+    </textobject>
+  </mediaobject>
+</span>
+name: verbatim
+<literallayout class="monospaced" tal:content="self"></literallayout>
+
+name: verb
+<phrase remap="verb" tal:content="self"></phrase>
+name: foreignlanguage otherlanguage
+<foreignphrase tal:replace="self"></foreignphrase>
+name: color textcolor
+<phrase remap="color" tal:content="self"></phrase>
+
+name: colorbox fcolorbox
+<para remap="colorbox" tal:content="self"></para>
+
+name: pagecolor definecolor
+name: newfloat floatstyle restylefloat floatname floatplacement listof
+
+name: includegraphics rotatebox scalebox reflectbox resizebox
+<imageobject remap="includegraphics">
+  <imagedata tal:attributes="fileref self/image/url" />
+  <textobject>
+    <phrase tal:content="self/source"></phrase>
+  </textobject>
+</imageobject>
+name: DeclareGraphicsExtensions graphicspath
+name: href
+type:xml
+<link tal:attributes="linkend self/attributes/url" tal:content="self"></link>
+
+name: url
+<ulink tal:attributes="url self"></ulink>
+
+name: nolinkurl
+<span tal:replace="self/attributes/url">url</span>
+
+name: hyperbaseurl
+
+name: hyperimage
+<imageobject>
+  <imagedata tal:attributes="fileref self/attributes/url" />
+</imageobject>
+
+name: hyperdef
+<anchor tal:attributes="id string:${self/attributes/category}.${self/attributes/name}" />
+
+name: hyperref
+type:xml
+<link tal:attributes="linkend string:${self/attributes/url}#${self/attributes/category}.${self/attributes/name}" tal:content="self">link text</link>
+
+name: hyperlink
+type:xml
+<link tal:attributes="linkend string:${self/idref/label/url}" tal:content="self"></link>
+
+name: hypertarget
+<anchor tal:attributes="name self/id" />
+
+name: phantomsection
+<anchor tal:attributes="name self/id" />
+
+name: autoref
+type:xml
+<link tal:attributes="linkend self/idref/label/url" tal:content="string:${self/idref/label/captionName} ${self/idref/label/ref}"></link>
+
+name: ref*
+<phrase tal:content="self/idref/label/ref">#.#.#</phrase>
+
+name: pageref*
+*
+
+name: Form TextField CheckBox ChoiceMenu PushButton Submit Reset
+
+
+name:lipsum
+<para tal:replace="self/text"></para>
+
+
+name: titleref
+type:xml
+<link remap="titleref" tal:attributes="linkend self/idref/label/url" tal:content="self/idref/label/title"></link>
+name: dominitoc dominilof dominilot dosecttoc dosectlot dosectlof \
+      doparttoc dopartlot dopartlof mtcprepare mtcsetfont mtcsetdepth \
+      mtcskip mtcskipamount tightmtcfalse tightmtctrue ktightmtcfalse \
+      ktightmtctrue undottedmtctrue undottedmtcfalse addstarredpart \
+      addstarredsection addstarredchapter adjustptc adjustmtc adjust stc \
+      decrementptc decrementmtc decrementstc incrementptc incrementstc \
+      incrementmtc mtcaddpart mtcaddchapter mtcaddsection mtctitle \
+      mlftitle mlttitle ptctitle plftitle plttitle stctitle slttitle \
+      mtcsettitle mtcsettitlefont mtcsetformat mtcsetrules ptcrule \
+      noptcrule mtcrule nomtcrule stcrule nostcrule plfrule noplfrule \
+      mlfrule nomlfrule slfrule noslfrule pltrule nopltrule mltrule \
+      nomltrule sltrule nosltrule mtcsetpagenumbers ptcpagenumbers \
+      noptcpagenumbers plfpagenumbers noplfpagenumbers pltpagenumbers \
+      nopltpagenumbers mtcpagenumbers nomtcpagenumbers mlfpagenumbers \
+      nomlfpagenumbers mltpagenumbers nomltpagenumbers stcpagenumbers \
+      nostcpagenumbers slfpagenumbers noslfpagenumbers sltpagenumbers \
+      nosltpagenumbers mtcsetfeature firstpartis firstchapteris \
+      firstsectionis mtcfixglossary mtcfixindex faketableofcontents \
+      fakelistoffigures fakelistoftables mtcselectlanguage
+
+name: minilof sectlof partlof
+
+name: minilot sectlot partlot minitoc secttoc parttoc
+
+name: cite citet citep citealt citealp citeauthor citeyear citeyearpar \
+      Cite Citet Citep Citealt Citealp Citeauthor citefullauthor citetalias \
+      citepalias
+type: xml
+<citation remap="cite">
+  <metal:block tal:repeat="item self/citation">
+    <link tal:condition="item/idref/bibitem/url" 
+      tal:attributes="linkend item/idref/bibitem/url" 
+      tal:content="item"></link><span tal:condition="not:item/idref/bibitem/url" 
+      tal:replace="item"></span>
+</metal:block></citation>
+
+name: citetext 
+<span tal:replace="self"></span>
+
+name: newblock nocite defcitealias
