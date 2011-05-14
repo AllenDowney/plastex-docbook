@@ -92,11 +92,11 @@ type: xml
 name: cite
 type: xml
 <citation tal:repeat="item self/citation">
-  <link tal:condition="item/idref/bibitem/url" 
-        tal:attributes="linkend item/idref/bibitem/url" 
+  <link tal:condition="item/idref/bibitem/url"
+        tal:attributes="linkend item/idref/bibitem/url"
         tal:content="item">
   </link>
-  <span tal:omit-tag="item/idref/bibitem/url" 
+  <span tal:omit-tag="item/idref/bibitem/url"
         tal:replace="item"></span>
 </citation>
 
@@ -134,20 +134,20 @@ name: raisebox rule
     </textobject>
   </mediaobject>
 </span>
-name: linebreak \ newline 
+name: linebreak \ newline
 
 name:pagebreak newpage clearpage cleardoublepage
 <beginpage />
 name: ref
 type:xml
-<link 
-   tal:attributes="linkend self/idref/label/id" 
+<link
+   tal:attributes="linkend self/idref/label/id"
    tal:content="self/idref/label/ref"></link>
 
 name: pageref
 type:xml
-<link 
-   tal:attributes="linkend self/idref/label/id" 
+<link
+   tal:attributes="linkend self/idref/label/id"
    tal:content="self/idref/label/ref">*</link>
 
 name: label
@@ -156,15 +156,27 @@ type:xml
 
 name: caption
 
-name: figure figure*
-<span tal:omit-tag="">
-  <informalfigure tal:condition="not:self/title"  tal:content="self"></informalfigure>
-  <figure tal:condition="self/title" 
-          tal:attributes="label self/title/id" 
-          tal:content="self">
+name:figure figure*
+type:xml
+<metal:block>
+  <figure tal:condition="self/title" tal:attributes="label self/title/id" remap="Figure">
     <title tal:content="self/title"></title>
+    <span tal:replace="self"></span>
   </figure>
-</span>
+  <informalfigure tal:condition="not:self/title"
+                  tal:attribute="label self/id"
+                  tal:content="self">
+  </informalfigure remap="Figure">
+</metal:block>
+
+name: includegraphics
+<mediaobject>
+  <imageobject remap="includegraphics">
+    <imagedata tal:attributes="fileref self/image/url"/>
+  </imageobject>
+  <textobject><phrase tal:content="self/source"></phrase></textobject>
+</mediaobject>
+
 
 name: table table*
 <div tal:replace="self"></div>
@@ -193,7 +205,7 @@ name: tiny scriptsize footnotesize small normalsize large Large LARGE huge Huge
 <span tal:replace="self"></span>
 
 name: symbol
-<mediaobject remap="symbol" tal:omit-tag="not:self/renderer/vectorImager/enabled" 
+<mediaobject remap="symbol" tal:omit-tag="not:self/renderer/vectorImager/enabled"
   format="SVG" tal:attributes="fileref self/vectorImage/url">
   <imageobject>
     <imagedata tal:attributes="fileref self/image/url"  />
@@ -205,10 +217,10 @@ name: footnote
 name: footnotemark footnotetext
 name: index
 <indexterm>
-  <primary tal:attributes="sortas self/prisort" 
+  <primary tal:attributes="sortas self/prisort"
            tal:content="self/primary/textNode"></primary>
   <secondary tal:condition="self/secondary"
-             tal:attributes="sortas self/secsort" 
+             tal:attributes="sortas self/secsort"
              tal:content="self/secondary/textNode"></secondary>
 </indexterm>
 
@@ -241,7 +253,7 @@ name: list trivlist
 type:xml
 <simplelist type="inline">
   <metal:block tal:repeat="item self">
-    <member 
+    <member
     tal:content="string:${item/attributes/term} |${self/attributes/defaultlabel} ${item}"></member>
   </metal:block>
 </simplelist>
@@ -428,10 +440,10 @@ name: picture
 </span>
 name:@
 
-name: par 
+name: par
 <para tal:content="self" tal:omit-tag="self/blockType"></para>
 
-name: active::^ 
+name: active::^
 <superscript tal:content="self"></superscript>
 
 name: active::_
@@ -527,7 +539,7 @@ type:xml
         tal:content="self"></para>
 </metal:block>
 name: $
-$ 
+$
 
 name: %
 %
@@ -709,13 +721,13 @@ name: cite citet citep citealt citealp citeauthor citeyear citeyearpar \
 type: xml
 <citation remap="cite">
   <metal:block tal:repeat="item self/citation">
-    <link tal:condition="item/idref/bibitem/url" 
-      tal:attributes="linkend item/idref/bibitem/url" 
-      tal:content="item"></link><span tal:condition="not:item/idref/bibitem/url" 
+    <link tal:condition="item/idref/bibitem/url"
+      tal:attributes="linkend item/idref/bibitem/url"
+      tal:content="item"></link><span tal:condition="not:item/idref/bibitem/url"
       tal:replace="item"></span>
 </metal:block></citation>
 
-name: citetext 
+name: citetext
 <span tal:replace="self"></span>
 
 name: newblock nocite defcitealias
