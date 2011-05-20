@@ -1,5 +1,6 @@
 \documentclass{book}
 \usepackage{graphicx}
+\usepackage{color}
 
 \begin{document}
 This document should get us started.
@@ -32,7 +33,7 @@ three & four\\
 \begin{table}
 \caption{table caption}\label{table:label}
 \begin{tabular}{ll}
-\multicolumn{2}{l}{multicolumn text}
+\multicolumn{2}{l}{multicolumn text}\\
 one & two\\
 three & four\\
 \end{tabular}
@@ -52,13 +53,12 @@ second para in a\linebreak minipage
 
 \pagebreak
 
-See \ref{table:label} on \pageref{table:label} for an example.
+See Table \ref{table:label} on page \pageref{table:label} for an example.
 
 
 \begin{figure}
-\caption{this is a figure}\caption{figure:label}
+\caption{this is a figure}\label{fig:label}
 \includegraphics{somefile}
-
 \textbf{some text}
 \end{figure}
 
@@ -73,11 +73,11 @@ See \ref{table:label} on \pageref{table:label} for an example.
 
 \textup{upshape text}
 
-\tiny{tiny text}
+{\tiny tiny text}
 
-\footnote{this is a footnote}
+text \footnote{this is a footnote}
 
-\footnotemark\footnotetext{a made-up footnote}
+textagain\footnotemark\footnotetext{a made-up footnote}
 
 \begin{itemize}
 \item first item
@@ -100,7 +100,7 @@ See \ref{table:label} on \pageref{table:label} for an example.
 x + y = \sqrt{z}
 \]
 
-$\sum x = y$
+this is an inline $\sum x = y$ equation
 
 \begin{eqnarray*}
  x = & y+z\\
@@ -110,14 +110,18 @@ $\sum x = y$
 text\par
 
 \begin{quotation}
-The strong do what they will.
+The strong do what they
+    will.
 
-The weak bear what they must.
+The weak bear what they
+              must.
 \end{quotation}
 
 \begin{verse}
-miles to go\\
-before I sleep
+miles to
+      go\\
+before I\\
+       sleep
 \end{verse}
 
 \begin{verbatim}

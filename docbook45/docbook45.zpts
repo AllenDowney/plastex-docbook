@@ -156,6 +156,7 @@ type:xml
 
 name: caption
 
+
 name:figure figure*
 type:xml
 <metal:block>
@@ -164,10 +165,12 @@ type:xml
     <span tal:replace="self"></span>
   </figure>
   <informalfigure tal:condition="not:self/title"
-                  tal:attribute="label self/id"
-                  tal:content="self">
-  </informalfigure remap="Figure">
+                  tal:attributes="label self/id"
+                  tal:content="self" remap="Figure">
+  </informalfigure>
 </metal:block>
+</span>
+
 
 name: includegraphics
 <mediaobject>
