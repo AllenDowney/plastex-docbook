@@ -1,16 +1,23 @@
+#!/usr/bin/env python
+
 import os
 import subprocess
 import shlex
 
-dirname = os.getcwd()
-tmpl_dirname = os.path.join(dirname,'..','docbook45')
-os.environ['PYTHONPATH'] = '%s:.:%s:' % (dirname, os.environ.get('PYTHONPATH',''))
-os.environ['DocBookTEMPLATES'] = '%s:.:%s:' % (tmpl_dirname, os.environ.get('DocBookTEMPLATES',''))
-print os.environ['DocBookTEMPLATES']
-cmd = 'plastex --renderer DocBook --filename test.xml test_document.tex'
-print 'hey'
-print shlex.split(cmd)
-p = subprocess.Popen(shlex.split(cmd))
-p.wait()
+root_dir = os.getcwd()
 
-  
+def runtest(version):
+    tmpl_dirname = os.path.normpath(os.path.join(root_dir, '..', 'docbook%s' % version))
+    os.environ['DocBookTEMPLATES'] = '%s:.:%s:' % (tmpl_dirname, os.environ.get('DocBookTEMPLATES', ''))
+
+    cmd = 'plastex --renderer DocBook --dir test_db%s ' % version
+    cmd += ' --filename result%s.xml test_document.tex' % version
+
+    p = subprocess.Popen(shlex.split(cmd))
+    p.wait()
+
+if __name__ == '__main__':
+    os.environ['PYTHONPATH'] = '%s:.:%s:' % (root_dir, os.environ.get('PYTHONPATH', ''))
+
+    for version in ('45', '50'):
+        runtest(version)
